@@ -13,20 +13,26 @@ export class App extends React.Component {
             .then(response => {
                 return response.json();
             })
-            .then(data => console.log(data));
+            .then(({data}) => {
+                this.setState({
+                    items: data.children
+                })
+            });
     }
 
     render() {
+        const {items} = this.state;
         return <div>
             <h1>Top commented</h1>
-            <div>
-                <img src="" alt="photo"/>
-                <p>Title</p>
-                <p>Number of comments: 123</p>
-                <a href="" target="_blank">
+            {items.map(item => <div key={item.data.id}>
+                {item.data.thumbnail!=='self' ? <img src={item.data.thumbnail}/>: null}
+                <h3>{item.data.title}</h3>
+                <p>Number of comments: {item.data.num_comments}</p>
+                <a href={item.data.permalink} target="_blank">
                     link
                 </a>
-            </div>
+            </div>)}
+
         </div>;
     }
 }
