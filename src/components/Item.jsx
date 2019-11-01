@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 
-export class Item extends Component {
+export class Item extends PureComponent {
     render() {
         const {data} = this.props;
         return (
